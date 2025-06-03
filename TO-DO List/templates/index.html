@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>To-Do List</title>
+
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+  />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 50px 20px;
+      color: #fff;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 600px;
+      padding: 30px 40px;
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 2.8rem;
+      margin-bottom: 25px;
+      text-align: center;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    form {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      outline: none;
+      color: #333;
+    }
+
+    button {
+      background: #ff6b6b;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 14px 25px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.6);
+    }
+
+    button:hover {
+      background: #ff4757;
+      box-shadow: 0 6px 20px rgba(255, 71, 87, 0.8);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 15px 20px;
+      font-size: 1rem;
+    }
+
+    thead th {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    tbody tr {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    tbody td:first-child {
+      font-weight: 600;
+    }
+
+    @media (max-width: 480px) {
+      form {
+        flex-direction: column;
+      }
+      button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fa-solid fa-list-check"></i> To-Do List</h1>
+
+    <form method="POST" action="/">
+      <input type="text" name="task" placeholder="Enter your task here" required />
+      <button type="submit"><i class="fa-solid fa-plus"></i> Add Task</button>
+    </form>
+
+    {% if tasks %}
+      <table>
+        <thead>
+          <tr>
+            <th><i class="fa-solid fa-clipboard-list"></i> Task</th>
+            <th><i class="fa-solid fa-calendar"></i> Date</th>
+            <th><i class="fa-solid fa-clock"></i> Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in tasks %}
+          <tr>
+            <td>{{ task['Task'] }}</td>
+            <td>{{ task['Date'] }}</td>
+            <td>{{ task['Time'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p style="text-align:center; margin-top: 30px; font-size: 1.2rem;">No tasks yet!</p>
+    {% endif %}
+  </div>
+</body>
+</html>
